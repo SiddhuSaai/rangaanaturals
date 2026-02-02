@@ -1,15 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-
-const certifications = [
-    { name: "FSSAI Certified", image: "/images/cert-fssai.svg" },
-    { name: "Organic India Certified", image: "/images/cert-organic.svg" },
-    { name: "Government Recognized", image: "/images/cert-govt.svg" },
-];
+import { useTranslations } from "next-intl";
 
 export default function OurStory() {
+    const t = useTranslations("story");
+    const tCommon = useTranslations("common");
+
+    const certifications = [
+        { name: t("certifications.fssai"), icon: "🛡️" },
+        { name: t("certifications.organic"), icon: "🌿" },
+        { name: t("certifications.govt"), icon: "✅" },
+    ];
+
     return (
         <section id="story" className="section-padding bg-gradient-to-b from-background to-grass-light dark:from-background dark:to-surface">
             <div className="container-custom">
@@ -22,29 +25,24 @@ export default function OurStory() {
                         viewport={{ once: true }}
                     >
                         <span className="text-sm font-medium text-primary uppercase tracking-widest">
-                            Our Story
+                            {t("label")}
                         </span>
                         <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl text-foreground mt-4 mb-6">
-                            A Journey Rooted in <span className="text-gradient">Tradition</span>
+                            {t("title")} <span className="text-gradient">{t("titleHighlight")}</span>
                         </h2>
 
                         <div className="space-y-4 text-foreground/70 leading-relaxed">
                             <p>
-                                At Rishi Organic, we believe in the power of nature. Our journey began with
-                                a simple question: <em>How can we bring pure, authentic products to every home?</em>
+                                {t("p1")} <em>{t("p1Question")}</em>
                             </p>
                             <p>
-                                From the fertile lands of Tamil Nadu, each grain carries the blessings of the
-                                soil and the dedication of our farmers. We work directly with organic farming
-                                communities, ensuring fair practices and sustainable methods.
+                                {t("p2")}
                             </p>
                             <p>
-                                Every product we offer is a testament to our commitment—from farm to your
-                                family, with nothing but purity in between. We don&apos;t just sell organic
-                                products; we share a piece of our heritage, our land, and our tradition.
+                                {t("p3")}
                             </p>
                             <p className="text-primary font-medium italic">
-                                &ldquo;In every grain, there&apos;s a story. In every product, there&apos;s a promise.&rdquo;
+                                &ldquo;{t("p4")}&rdquo;
                             </p>
                         </div>
                     </motion.div>
@@ -58,7 +56,7 @@ export default function OurStory() {
                     >
                         <div className="glass-card p-8">
                             <h3 className="font-heading text-xl text-foreground mb-6 text-center">
-                                Certified & Trusted
+                                {t("certifiedTitle")}
                             </h3>
 
                             {/* Certification Badges */}
@@ -72,13 +70,8 @@ export default function OurStory() {
                                         viewport={{ once: true }}
                                         className="flex flex-col items-center gap-3"
                                     >
-                                        <div className="relative w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-surface rounded-xl p-2 shadow-md">
-                                            <Image
-                                                src={cert.image}
-                                                alt={cert.name}
-                                                fill
-                                                className="object-contain p-2"
-                                            />
+                                        <div className="relative w-16 h-16 md:w-20 md:h-20 bg-primary/10 dark:bg-primary/20 rounded-xl flex items-center justify-center shadow-md">
+                                            <span className="text-3xl">{cert.icon}</span>
                                         </div>
                                         <span className="text-xs text-center text-foreground/60">
                                             {cert.name}
@@ -93,7 +86,7 @@ export default function OurStory() {
                                     <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                     </svg>
-                                    <span>100% Verified & Authentic</span>
+                                    <span>{tCommon("verified")}</span>
                                 </div>
                             </div>
                         </div>
@@ -103,3 +96,4 @@ export default function OurStory() {
         </section>
     );
 }
+

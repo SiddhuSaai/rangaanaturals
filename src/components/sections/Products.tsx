@@ -3,88 +3,100 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-const productCategories = [
-    {
-        id: "rice",
-        name: "Rice",
-        icon: "🌾",
-        count: 12,
-        image: "/images/products/rice.svg",
-        description: "Traditional varieties grown organically",
-    },
-    {
-        id: "millets",
-        name: "Millets",
-        icon: "🌿",
-        count: 8,
-        image: "/images/products/millets.svg",
-        description: "Ancient grains for modern health",
-    },
-    {
-        id: "ghee-oils",
-        name: "Ghee & Oils",
-        icon: "🧈",
-        count: 6,
-        image: "/images/products/ghee.svg",
-        description: "Pure, cold-pressed, traditional",
-    },
-    {
-        id: "sweeteners",
-        name: "Sweeteners",
-        icon: "🍯",
-        count: 5,
-        image: "/images/products/jaggery.svg",
-        description: "Natural sweetness from palm & cane",
-    },
-    {
-        id: "palm",
-        name: "Palm Products",
-        icon: "🌴",
-        count: 7,
-        image: "/images/products/palm.svg",
-        description: "Traditional palm-based delicacies",
-    },
-    {
-        id: "malts",
-        name: "Malts",
-        icon: "🧪",
-        count: 4,
-        image: "/images/products/malts.svg",
-        description: "Nutritious sprouted grain malts",
-    },
-    {
-        id: "flour",
-        name: "Flour",
-        icon: "🥣",
-        count: 9,
-        image: "/images/products/flour.svg",
-        description: "Stone-ground, preservative-free",
-    },
-    {
-        id: "health-mix",
-        name: "Health Mix",
-        icon: "💪",
-        count: 3,
-        image: "/images/products/health-mix.svg",
-        description: "Traditional sathu maavu blends",
-    },
-    {
-        id: "cosmetics",
-        name: "Cosmetics",
-        icon: "🧴",
-        count: 6,
-        image: "/images/products/cosmetics.svg",
-        description: "Herbal beauty from nature",
-    },
-];
-
-const filterOptions = ["All", "Rice", "Millets", "Ghee & Oils", "Sweeteners", "Health"];
 
 export default function Products() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [activeFilter, setActiveFilter] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
+
+    const t = useTranslations("products");
+    const tCommon = useTranslations("common");
+
+    const productCategories = [
+        {
+            id: "rice",
+            name: t("categories.rice.name"),
+            icon: "🌾",
+            count: 12,
+            color: "from-amber-400/20 to-yellow-500/20",
+            description: t("categories.rice.description"),
+        },
+        {
+            id: "millets",
+            name: t("categories.millets.name"),
+            icon: "🌿",
+            count: 8,
+            color: "from-green-400/20 to-emerald-500/20",
+            description: t("categories.millets.description"),
+        },
+        {
+            id: "ghee-oils",
+            name: t("categories.gheeOils.name"),
+            icon: "🧈",
+            count: 6,
+            color: "from-orange-400/20 to-amber-500/20",
+            description: t("categories.gheeOils.description"),
+        },
+        {
+            id: "sweeteners",
+            name: t("categories.sweeteners.name"),
+            icon: "🍯",
+            count: 5,
+            color: "from-yellow-400/20 to-orange-500/20",
+            description: t("categories.sweeteners.description"),
+        },
+        {
+            id: "palm",
+            name: t("categories.palm.name"),
+            icon: "🌴",
+            count: 7,
+            color: "from-lime-400/20 to-green-500/20",
+            description: t("categories.palm.description"),
+        },
+        {
+            id: "malts",
+            name: t("categories.malts.name"),
+            icon: "🧪",
+            count: 4,
+            color: "from-purple-400/20 to-pink-500/20",
+            description: t("categories.malts.description"),
+        },
+        {
+            id: "flour",
+            name: t("categories.flour.name"),
+            icon: "🥣",
+            count: 9,
+            color: "from-stone-400/20 to-amber-500/20",
+            description: t("categories.flour.description"),
+        },
+        {
+            id: "health-mix",
+            name: t("categories.healthMix.name"),
+            icon: "💪",
+            count: 3,
+            color: "from-rose-400/20 to-red-500/20",
+            description: t("categories.healthMix.description"),
+        },
+        {
+            id: "cosmetics",
+            name: t("categories.cosmetics.name"),
+            icon: "🧴",
+            count: 6,
+            color: "from-pink-400/20 to-rose-500/20",
+            description: t("categories.cosmetics.description"),
+        },
+    ];
+
+    const filterOptions = [
+        { key: "All", label: t("filters.all") },
+        { key: "Rice", label: t("filters.rice") },
+        { key: "Millets", label: t("filters.millets") },
+        { key: "Ghee & Oils", label: t("filters.gheeOils") },
+        { key: "Sweeteners", label: t("filters.sweeteners") },
+        { key: "Health", label: t("filters.health") },
+    ];
 
     const filteredCategories = productCategories.filter((cat) => {
         if (activeFilter !== "All" && !cat.name.includes(activeFilter)) {
@@ -97,8 +109,19 @@ export default function Products() {
     });
 
     return (
-        <section id="products" className="section-padding bg-background">
-            <div className="container-custom">
+        <section id="products" className="section-padding relative overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/images/products-ecosystem-bg.jpg"
+                    alt="Green agricultural landscape"
+                    fill
+                    className="object-cover object-center opacity-20 dark:opacity-10"
+                />
+                <div className="absolute inset-0 bg-background/80 dark:bg-background/90" />
+            </div>
+
+            <div className="container-custom relative z-10">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -108,13 +131,13 @@ export default function Products() {
                     className="text-center mb-12"
                 >
                     <span className="text-sm font-medium text-primary uppercase tracking-widest">
-                        Our Products
+                        {t("label")}
                     </span>
                     <h2 className="font-heading text-3xl md:text-4xl text-foreground mt-4">
-                        From Nature to <span className="text-gradient">Your Table</span>
+                        {t("title")} <span className="text-gradient">{t("titleHighlight")}</span>
                     </h2>
                     <p className="text-foreground/60 mt-4 max-w-2xl mx-auto">
-                        Explore our range of certified organic products, each crafted with care and tradition.
+                        {t("description")}
                     </p>
                 </motion.div>
 
@@ -130,7 +153,7 @@ export default function Products() {
                     <div className="relative max-w-md mx-auto mb-6">
                         <input
                             type="text"
-                            placeholder="Search products..."
+                            placeholder={tCommon("searchProducts")}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full px-5 py-3 pl-12 rounded-full bg-surface border border-primary/20 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/30"
@@ -154,14 +177,14 @@ export default function Products() {
                     <div className="flex flex-wrap justify-center gap-2">
                         {filterOptions.map((filter) => (
                             <button
-                                key={filter}
-                                onClick={() => setActiveFilter(filter)}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === filter
+                                key={filter.key}
+                                onClick={() => setActiveFilter(filter.key)}
+                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === filter.key
                                     ? "bg-primary text-white"
                                     : "bg-surface text-foreground/60 hover:bg-grass-light hover:text-primary"
                                     }`}
                             >
-                                {filter}
+                                {filter.label}
                             </button>
                         ))}
                     </div>
@@ -184,19 +207,16 @@ export default function Products() {
                                 onClick={() => setSelectedCategory(category.id)}
                                 className="product-card glass-card overflow-hidden cursor-pointer group"
                             >
-                                {/* Image */}
-                                <div className="relative h-48 overflow-hidden">
-                                    <Image
-                                        src={category.image}
-                                        alt={category.name}
-                                        fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                                {/* Icon with Gradient Background */}
+                                <div className={`relative h-48 overflow-hidden bg-gradient-to-br ${category.color}`}>
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <span className="text-8xl opacity-80 transition-transform duration-500 group-hover:scale-125">{category.icon}</span>
+                                    </div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
                                     <div className="absolute bottom-4 left-4 right-4">
                                         <div className="flex items-center justify-between">
-                                            <span className="text-white text-3xl">{category.icon}</span>
-                                            <span className="text-white/80 text-sm bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                                            <span className="text-foreground text-3xl">{category.icon}</span>
+                                            <span className="text-foreground/80 text-sm bg-white/30 dark:bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
                                                 {category.count} items
                                             </span>
                                         </div>

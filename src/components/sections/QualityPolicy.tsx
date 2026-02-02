@@ -1,35 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const qualitySteps = [
-    {
-        number: "01",
-        title: "Authentic Sourcing",
-        description: "Direct partnerships with certified organic farmers across Tamil Nadu. Every product is traceable to its source.",
-        icon: "🌱",
-    },
-    {
-        number: "02",
-        title: "Quality Control",
-        description: "Rigorous testing at every stage—from harvest to packaging. No compromises on purity or safety.",
-        icon: "🔬",
-    },
-    {
-        number: "03",
-        title: "Sustainability",
-        description: "Eco-friendly packaging, minimal waste processing, and support for renewable farming practices.",
-        icon: "♻️",
-    },
-    {
-        number: "04",
-        title: "Continuous Improvement",
-        description: "Always evolving our processes based on research, feedback, and the latest in organic agriculture.",
-        icon: "📈",
-    },
-];
+import { useTranslations } from "next-intl";
 
 export default function QualityPolicy() {
+    const t = useTranslations("quality");
+
+    const qualitySteps = [
+        {
+            number: "01",
+            title: t("steps.sourcing.title"),
+            description: t("steps.sourcing.description"),
+            icon: "🌱",
+        },
+        {
+            number: "02",
+            title: t("steps.control.title"),
+            description: t("steps.control.description"),
+            icon: "🔬",
+        },
+        {
+            number: "03",
+            title: t("steps.sustainability.title"),
+            description: t("steps.sustainability.description"),
+            icon: "♻️",
+        },
+        {
+            number: "04",
+            title: t("steps.improvement.title"),
+            description: t("steps.improvement.description"),
+            icon: "📈",
+        },
+    ];
     return (
         <section id="quality" className="section-padding bg-grass-light dark:bg-surface">
             <div className="container-custom">
@@ -42,13 +44,13 @@ export default function QualityPolicy() {
                     className="text-center mb-16"
                 >
                     <span className="text-sm font-medium text-primary uppercase tracking-widest">
-                        Quality Policy
+                        {t("label")}
                     </span>
                     <h2 className="font-heading text-3xl md:text-4xl text-foreground mt-4">
-                        Our Promise to <span className="text-gradient">Purity</span>
+                        {t("title")} <span className="text-gradient">{t("titleHighlight")}</span>
                     </h2>
                     <p className="text-foreground/60 mt-4 max-w-2xl mx-auto">
-                        Every step of our process is designed to deliver only the best to your family.
+                        {t("description")}
                     </p>
                 </motion.div>
 

@@ -5,18 +5,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/components/providers/ThemeProvider";
-
-const navLinks = [
-    { href: "#products", label: "Products" },
-    { href: "#story", label: "Our Story" },
-    { href: "#quality", label: "Quality" },
-    { href: "#contact", label: "Contact" },
-];
+import { useLanguage } from "@/components/providers/LanguageProvider";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { theme, toggleTheme, mounted } = useTheme();
+    const { locale, setLocale, isLoading } = useLanguage();
+    const t = useTranslations("nav");
+
+    const navLinks = [
+        { href: "#products", label: t("products") },
+        { href: "#story", label: t("ourStory") },
+        { href: "#quality", label: t("quality") },
+        { href: "#contact", label: t("contact") },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,7 +36,7 @@ export default function Header() {
                 initial={{ y: -100 }}
                 animate={{ y: isScrolled ? 0 : -100 }}
                 transition={{ duration: 0.3 }}
-                className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-primary/10"
+                className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-primary/10 pt-[env(safe-area-inset-top)]"
             >
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-16 md:h-20">
@@ -64,8 +68,32 @@ export default function Header() {
                         </div>
 
                         {/* Right Actions */}
-                        <div className="flex items-center gap-4">
-                            {/* Theme Toggle - only show after mounted to prevent hydration mismatch */}
+                        <div className="flex items-center gap-3">
+                            {/* Language Switcher */}
+                            {!isLoading && (
+                                <div className="flex items-center gap-1 bg-grass-light dark:bg-surface rounded-full p-1">
+                                    <button
+                                        onClick={() => locale !== "en" && setLocale("en")}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${locale === "en"
+                                            ? "bg-primary text-white"
+                                            : "text-foreground/60 hover:text-primary"
+                                            }`}
+                                    >
+                                        EN
+                                    </button>
+                                    <button
+                                        onClick={() => locale !== "ta" && setLocale("ta")}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${locale === "ta"
+                                            ? "bg-primary text-white"
+                                            : "text-foreground/60 hover:text-primary"
+                                            }`}
+                                    >
+                                        தமிழ்
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Theme Toggle */}
                             {mounted && (
                                 <button
                                     onClick={toggleTheme}
@@ -132,3 +160,4 @@ export default function Header() {
         </>
     );
 }
+

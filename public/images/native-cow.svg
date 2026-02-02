@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-  <rect width="800" height="300" fill="#87CEEB"/>
-  <rect y="300" width="800" height="300" fill="#4CAF50"/>
-  <!-- Cow silhouette -->
-  <ellipse cx="400" cy="350" rx="120" ry="80" fill="#FAFAF7"/>
-  <ellipse cx="320" cy="320" rx="40" ry="30" fill="#FAFAF7"/>
-  <text x="400" y="550" text-anchor="middle" fill="#2E7D32" font-family="serif" font-size="24">Native Cow</text>
-</svg>

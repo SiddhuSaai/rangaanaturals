@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function TempleHeritage() {
     const ref = useRef(null);
@@ -12,28 +13,25 @@ export default function TempleHeritage() {
     });
 
     const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3]);
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+    const t = useTranslations("templeHeritage");
 
     return (
         <section
             ref={ref}
-            className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden"
+            className="relative h-[80vh] md:h-screen flex items-center justify-center overflow-hidden"
         >
             {/* Background - Temple + Kollidam Bridge */}
-            <motion.div
-                style={{ scale }}
-                className="absolute inset-0 z-0"
-            >
+            <div className="absolute inset-0 z-0">
                 <Image
-                    src="/images/temple-kollidam.svg"
+                    src="/images/temple+kollidam-bridge.png"
                     alt="Srirangam Temple and Kollidam Bridge landscape"
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
                     sizes="100vw"
                 />
-                {/* Mist/Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/40 via-primary-dark/60 to-primary-dark/80" />
-            </motion.div>
+                {/* Subtle dark cinematic overlay - no green */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70" />
+            </div>
 
             {/* Content */}
             <motion.div
@@ -45,32 +43,38 @@ export default function TempleHeritage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
                     viewport={{ once: true }}
-                    className="max-w-3xl mx-auto"
+                    className="max-w-4xl mx-auto"
                 >
                     {/* Decorative Line */}
                     <div className="flex items-center justify-center gap-4 mb-8">
-                        <div className="w-16 h-px bg-white/30" />
-                        <span className="text-3xl">🕉️</span>
-                        <div className="w-16 h-px bg-white/30" />
+                        <div className="w-20 h-px bg-white/40" />
+                        <span className="text-4xl">🕉️</span>
+                        <div className="w-20 h-px bg-white/40" />
                     </div>
 
                     {/* Quote */}
-                    <h2 className="font-heading text-2xl md:text-4xl lg:text-5xl text-white leading-relaxed">
-                        &ldquo;Tradition is not preserved in books,
+                    <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl text-white leading-relaxed drop-shadow-2xl">
+                        &ldquo;{t("quote1")}
                         <br />
-                        <span className="text-grass-light">but in what we choose to consume.&rdquo;</span>
+                        <span className="text-amber-200">{t("quote2")}&rdquo;</span>
                     </h2>
 
                     {/* Subtext */}
-                    <p className="mt-8 text-white/60 text-sm md:text-base max-w-xl mx-auto">
-                        From the sacred banks of the Kaveri, where Srirangam temple has stood for centuries,
-                        we draw inspiration to preserve ancient wisdom through pure, organic living.
+                    <p className="mt-10 text-white/80 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                        {t("description")}
                     </p>
+
+                    {/* Location Badge */}
+                    <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+                        <span className="text-lg">📍</span>
+                        <span className="text-white/80 text-sm">{t("location")}</span>
+                    </div>
                 </motion.div>
             </motion.div>
 
             {/* Bottom Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
+            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent z-10" />
         </section>
     );
 }
+

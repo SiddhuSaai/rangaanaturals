@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function HeroSection() {
     const ref = useRef(null);
@@ -15,6 +16,9 @@ export default function HeroSection() {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
     const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
+    const t = useTranslations("hero");
+    const tCommon = useTranslations("common");
 
     return (
         <section
@@ -31,7 +35,7 @@ export default function HeroSection() {
                     alt="Lush green paddy fields in Tamil Nadu"
                     fill
                     priority
-                    className="object-cover"
+                    className="object-cover object-center"
                     sizes="100vw"
                 />
                 {/* Gradient Overlay */}
@@ -66,9 +70,9 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4"
                 >
-                    100% Pure Natural
+                    {t("title")}
                     <br />
-                    <span className="text-gradient">Products Store</span>
+                    <span className="text-gradient">{t("subtitle")}</span>
                 </motion.h1>
 
                 {/* Subline */}
@@ -78,7 +82,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.6 }}
                     className="text-lg md:text-xl text-foreground/70 mb-4 max-w-xl mx-auto"
                 >
-                    Rooted in soil. Guided by tradition.
+                    {t("tagline")}
                 </motion.p>
 
                 {/* Tagline */}
@@ -88,7 +92,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, delay: 0.8 }}
                     className="text-sm md:text-base text-primary font-medium mb-12 tracking-wide"
                 >
-                    &ldquo;Tradition you can taste, Purity you can trust&rdquo;
+                    &ldquo;{t("quote")}&rdquo;
                 </motion.p>
 
                 {/* CTAs */}
@@ -99,10 +103,10 @@ export default function HeroSection() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
                     <Link href="#products" className="btn-primary">
-                        Explore Our Products
+                        {t("exploreProducts")}
                     </Link>
                     <Link href="#story" className="btn-secondary">
-                        Our Story
+                        {t("ourStory")}
                     </Link>
                 </motion.div>
             </motion.div>
@@ -115,7 +119,7 @@ export default function HeroSection() {
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
             >
                 <div className="flex flex-col items-center gap-2 text-foreground/50">
-                    <span className="text-sm">Scroll to explore</span>
+                    <span className="text-sm">{tCommon("scrollToExplore")}</span>
                     <svg
                         className="w-6 h-6 animate-bounce-slow"
                         fill="none"
@@ -134,3 +138,4 @@ export default function HeroSection() {
         </section>
     );
 }
+

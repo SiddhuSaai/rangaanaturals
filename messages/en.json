@@ -1,0 +1,176 @@
+{
+    "common": {
+        "scrollToExplore": "Scroll to explore",
+        "brandName": "Rangaa Naturals",
+        "verified": "100% Verified & Authentic",
+        "items": "items",
+        "explore": "Explore",
+        "viewAll": "View All Products",
+        "searchProducts": "Search products...",
+        "since": "Since 2015",
+        "getCatalog": "Get Catalog on WhatsApp",
+        "catalogComingSoon": "Product details coming soon! Contact us on WhatsApp for the full catalog and pricing."
+    },
+    "nav": {
+        "products": "Products",
+        "ourStory": "Our Story",
+        "quality": "Quality",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "100% Pure Natural",
+        "subtitle": "Products Store",
+        "tagline": "Rooted in soil. Guided by tradition.",
+        "quote": "Tradition you can taste, Purity you can trust",
+        "exploreProducts": "Explore Our Products",
+        "ourStory": "Our Story"
+    },
+    "scrollStory": {
+        "step1": {
+            "title": "From Soil to Soul",
+            "text": "True wellness begins with nature…"
+        },
+        "step2": {
+            "title": "Tradition in Every Drop",
+            "text": "Behind every product is a farmer…"
+        },
+        "step3": {
+            "title": "Purity You Can Trust",
+            "text": "Behind every farmer is the soil…"
+        },
+        "step4": {
+            "title": "Strength & Heritage",
+            "text": "Rooted in Tamil Nadu's proud culture…"
+        }
+    },
+    "templeHeritage": {
+        "quote1": "Tradition is not preserved in books,",
+        "quote2": "but in what we choose to consume.",
+        "description": "From the sacred banks of the Kaveri, where the Srirangam temple has stood for centuries, we draw inspiration to preserve ancient wisdom through pure, organic living.",
+        "location": "Srirangam, Tamil Nadu"
+    },
+    "story": {
+        "label": "Our Story",
+        "title": "A Journey Rooted in",
+        "titleHighlight": "Tradition",
+        "p1": "At Rangaa Naturals, we believe in the power of nature. Our journey began with a simple question:",
+        "p1Question": "How can we bring pure, authentic products to every home?",
+        "p2": "From the fertile lands of Tamil Nadu, each grain carries the blessings of the soil and the dedication of our farmers. We work directly with organic farming communities, ensuring fair practices and sustainable methods.",
+        "p3": "Every product we offer is a testament to our commitment—from farm to your family, with nothing but purity in between. We don't just sell organic products; we share a piece of our heritage, our land, and our tradition.",
+        "p4": "In every grain, there's a story. In every product, there's a promise.",
+        "certifiedTitle": "Certified & Trusted",
+        "certifications": {
+            "fssai": "FSSAI Certified",
+            "organic": "Organic India Certified",
+            "govt": "Government Recognized"
+        }
+    },
+    "visionMission": {
+        "label": "Our Purpose",
+        "title": "Vision &",
+        "titleHighlight": "Mission",
+        "visionTitle": "Vision",
+        "visionText": "To be the trusted bridge between Tamil Nadu's organic farms and health-conscious families worldwide—preserving tradition while nurturing the future of sustainable living.",
+        "missionTitle": "Mission",
+        "mission": {
+            "organic": {
+                "title": "100% Organic",
+                "description": "Pure products, no chemicals"
+            },
+            "fairTrade": {
+                "title": "Fair Trade",
+                "description": "Direct farmer partnerships"
+            },
+            "purity": {
+                "title": "Uncompromised Purity",
+                "description": "Rigorous quality control"
+            },
+            "health": {
+                "title": "Community Health",
+                "description": "Wellness for all families"
+            }
+        },
+        "stats": {
+            "products": "Products",
+            "farmers": "Farmers",
+            "families": "Happy Families",
+            "years": "Years of Trust"
+        }
+    },
+    "products": {
+        "label": "Our Products",
+        "title": "From Nature to",
+        "titleHighlight": "Your Table",
+        "description": "Explore our range of certified organic products, each crafted with care and tradition.",
+        "filters": {
+            "all": "All",
+            "rice": "Rice",
+            "millets": "Millets",
+            "gheeOils": "Ghee & Oils",
+            "sweeteners": "Sweeteners",
+            "health": "Health"
+        },
+        "categories": {
+            "rice": {
+                "name": "Rice",
+                "description": "Traditional varieties grown organically"
+            },
+            "millets": {
+                "name": "Millets",
+                "description": "Ancient grains for modern health"
+            },
+            "gheeOils": {
+                "name": "Ghee & Oils",
+                "description": "Pure, cold-pressed, traditional"
+            },
+            "sweeteners": {
+                "name": "Sweeteners",
+                "description": "Natural sweetness from palm & cane"
+            },
+            "palm": {
+                "name": "Palm Products",
+                "description": "Traditional palm-based delicacies"
+            },
+            "malts": {
+                "name": "Malts",
+                "description": "Nutritious sprouted grain malts"
+            },
+            "flour": {
+                "name": "Flour",
+                "description": "Stone-ground, preservative-free"
+            },
+            "healthMix": {
+                "name": "Health Mix",
+                "description": "Traditional sathu maavu blends"
+            },
+            "cosmetics": {
+                "name": "Cosmetics",
+                "description": "Herbal beauty from nature"
+            }
+        }
+    },
+    "quality": {
+        "label": "Quality Policy",
+        "title": "Our Promise to",
+        "titleHighlight": "Purity",
+        "description": "Every step of our process is designed to deliver only the best to your family.",
+        "steps": {
+            "sourcing": {
+                "title": "Authentic Sourcing",
+                "description": "Direct partnerships with certified organic farmers across Tamil Nadu. Every product is traceable to its source."
+            },
+            "control": {
+                "title": "Quality Control",
+                "description": "Rigorous testing at every stage—from harvest to packaging. No compromises on purity or safety."
+            },
+            "sustainability": {
+                "title": "Sustainability",
+                "description": "Eco-friendly packaging, minimal waste processing, and support for renewable farming practices."
+            },
+            "improvement": {
+                "title": "Continuous Improvement",
+                "description": "Always evolving our processes based on research, feedback, and the latest in organic agriculture."
+            }
+        }
+    }
+}
