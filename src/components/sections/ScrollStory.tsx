@@ -56,6 +56,17 @@ export default function ScrollStory() {
                     transform: 'translate3d(0, 0, 0)',
                 }}
             >
+                {/* Blurred background images - always visible */}
+                {storySteps.map((step, index) => (
+                    <BlurredBackground
+                        key={`blur-${index}`}
+                        image={step.image}
+                        index={index}
+                        total={storySteps.length}
+                        scrollYProgress={scrollYProgress}
+                    />
+                ))}
+
                 {/* Story Steps */}
                 {storySteps.map((step, index) => (
                     <ScrollStoryStep
@@ -68,6 +79,42 @@ export default function ScrollStory() {
                 ))}
             </div>
         </section>
+    );
+}
+
+// Blurred background component
+interface BlurredBackgroundProps {
+    image: string;
+    index: number;
+    total: number;
+    scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}
+
+function BlurredBackground({ image, index, total, scrollYProgress }: BlurredBackgroundProps) {
+    const start = index / total;
+    const end = (index + 1) / total;
+
+    // Show blurred version slightly before the actual image appears
+    const opacity = useTransform(
+        scrollYProgress,
+        [start - 0.1, start - 0.02, end - 0.02, end + 0.05],
+        [0, 0.7, 0.7, 0]
+    );
+
+    return (
+        <motion.div
+            style={{ opacity }}
+            className="absolute inset-0 -z-10"
+        >
+            <Image
+                src={image}
+                alt=""
+                fill
+                className="object-cover object-center blur-xl scale-110"
+                sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-black/40" />
+        </motion.div>
     );
 }
 
