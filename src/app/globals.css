@@ -1,26 +1,232 @@
 @import "tailwindcss";
 
+/* ===== RISHI ORGANIC DESIGN SYSTEM ===== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors */
+  --color-primary: #2E7D32;
+  --color-primary-dark: #1B5E20;
+  --color-primary-light: #4CAF50;
+  
+  /* Accent Colors */
+  --color-grass-light: #E8F5E9;
+  --color-earth-brown: #6D4C41;
+  --color-gold: #C9A227;
+  
+  /* Backgrounds */
+  --background: #FAFAF7;
+  --foreground: #1A1A1A;
+  --surface: #FFFFFF;
+  
+  /* Text Colors */
+  --text-primary: #1A1A1A;
+  --text-secondary: #5C5C5C;
+  --text-muted: #8A8A8A;
+}
+
+.dark {
+  /* Dark Mode - Deep Forest Green */
+  --color-primary: #4CAF50;
+  --color-primary-dark: #2E7D32;
+  --color-primary-light: #81C784;
+  
+  --color-grass-light: #1A3D2B;
+  --color-earth-brown: #A1887F;
+  
+  --background: #0F2A1D;
+  --foreground: #E8F5E9;
+  --surface: #1A3D2B;
+  
+  --text-primary: #E8F5E9;
+  --text-secondary: #A5D6A7;
+  --text-muted: #81C784;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
+  --color-grass-light: var(--color-grass-light);
+  --color-earth-brown: var(--color-earth-brown);
+  --color-gold: var(--color-gold);
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ===== BASE STYLES ===== */
+
+* {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair, 'Playfair Display', serif);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-hero {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0) 0%,
+    rgba(232, 245, 233, 0.3) 50%,
+    rgba(232, 245, 233, 0.6) 100%
+  );
+}
+
+.dark .bg-gradient-hero {
+  background: linear-gradient(180deg, 
+    rgba(15, 42, 29, 0) 0%,
+    rgba(15, 42, 29, 0.5) 50%,
+    rgba(15, 42, 29, 0.9) 100%
+  );
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass-card {
+  background: rgba(26, 61, 43, 0.7);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  border: 2px solid var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-grass-light);
+  transform: translateY(-2px);
+}
+
+/* Scroll indicator animation */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* WhatsApp pulse animation */
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Section spacing */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Container */
+.container-custom {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Timeline dot */
+.timeline-dot {
+  width: 1rem;
+  height: 1rem;
+  background: var(--color-primary);
+  border-radius: 50%;
+  border: 3px solid var(--color-grass-light);
+  box-shadow: 0 0 0 4px var(--color-primary);
+}
+
+/* Product card hover */
+.product-card {
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.dark .product-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }

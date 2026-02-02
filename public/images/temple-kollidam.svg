@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="templeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F2A1D"/>
+      <stop offset="50%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#templeGradient)"/>
+  <!-- Temple gopuram silhouette -->
+  <polygon points="960,200 900,500 1020,500" fill="#1A3D2B"/>
+  <polygon points="960,250 920,450 1000,450" fill="#0F2A1D"/>
+  <!-- Temple levels -->
+  <rect x="880" y="500" width="160" height="40" fill="#1A3D2B"/>
+  <rect x="860" y="540" width="200" height="60" fill="#0F2A1D"/>
+  <!-- Bridge silhouette -->
+  <rect x="0" y="700" width="1920" height="20" fill="#1A3D2B"/>
+  <g fill="#0F2A1D">
+    <rect x="100" y="680" width="20" height="40"/>
+    <rect x="300" y="680" width="20" height="40"/>
+    <rect x="500" y="680" width="20" height="40"/>
+    <rect x="700" y="680" width="20" height="40"/>
+    <rect x="900" y="680" width="20" height="40"/>
+    <rect x="1100" y="680" width="20" height="40"/>
+    <rect x="1300" y="680" width="20" height="40"/>
+    <rect x="1500" y="680" width="20" height="40"/>
+    <rect x="1700" y="680" width="20" height="40"/>
+  </g>
+  <!-- Mist effect -->
+  <ellipse cx="400" cy="600" rx="400" ry="100" fill="white" opacity="0.1"/>
+  <ellipse cx="1400" cy="550" rx="500" ry="120" fill="white" opacity="0.08"/>
+</svg>
