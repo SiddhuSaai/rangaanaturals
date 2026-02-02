@@ -76,6 +76,17 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
+/* Safe area header for notched devices */
+.safe-header {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@supports not (padding-top: env(safe-area-inset-top)) {
+  .safe-header {
+    padding-top: 0px;
+  }
+}
+
 /* ===== UTILITY CLASSES ===== */
 
 .text-gradient {
