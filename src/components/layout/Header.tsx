@@ -30,6 +30,24 @@ export default function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Detect safe area inset for notched devices
+    const [safeAreaTop, setSafeAreaTop] = useState(0);
+    useEffect(() => {
+        // Try to get safe area from CSS env()
+        const testEl = document.createElement('div');
+        testEl.style.paddingTop = 'env(safe-area-inset-top, 0px)';
+        document.body.appendChild(testEl);
+        const computed = parseInt(getComputedStyle(testEl).paddingTop) || 0;
+        document.body.removeChild(testEl);
+
+        // If env() returns 0 but we're on a notched device, use fallback
+        // Check if viewport-fit is cover and screen dimensions suggest a notched phone
+        const isNotchedDevice = window.innerWidth < 500 && window.innerHeight > 700 &&
+            (window.screen.height >= 812 || window.devicePixelRatio >= 3);
+
+        setSafeAreaTop(computed > 0 ? computed : (isNotchedDevice ? 47 : 0));
+    }, []);
+
     // Conditional rendering - don't render header at all when not needed
     if (!isScrolled && !isMobileMenuOpen) {
         return null;
@@ -42,7 +60,7 @@ export default function Header() {
                     transform: 'translate3d(0, 0, 0)',
                     WebkitTransform: 'translate3d(0, 0, 0)',
                     willChange: 'transform',
-                    paddingTop: 'env(safe-area-inset-top, 0px)',
+                    paddingTop: safeAreaTop,
                 }}
                 className="fixed top-0 left-0 right-0 z-[9999] bg-background border-b border-primary/10 shadow-sm"
             >
