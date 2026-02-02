@@ -25,9 +25,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         const stored = localStorage.getItem("rishi-theme") as Theme;
         if (stored) {
             setTheme(stored);
-        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            setTheme("dark");
         }
+        // Default to light theme if no preference stored
     }, []);
 
     useEffect(() => {

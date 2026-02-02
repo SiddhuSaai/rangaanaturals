@@ -33,10 +33,10 @@ export default function Header() {
     return (
         <>
             <motion.header
-                initial={{ y: -100 }}
-                animate={{ y: isScrolled ? 0 : -100 }}
+                initial={{ y: -150 }}
+                animate={{ y: isScrolled ? 0 : -150 }}
                 transition={{ duration: 0.3 }}
-                className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-primary/10 pt-[env(safe-area-inset-top)]"
+                className="fixed top-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-lg border-b border-primary/10 shadow-sm pt-[env(safe-area-inset-top,0px)]"
             >
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-16 md:h-20">
