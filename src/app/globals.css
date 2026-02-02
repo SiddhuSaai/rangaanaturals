@@ -71,11 +71,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-html {
-  height: 100%;
-  overflow-x: hidden;
-}
-
 h1,
 h2,
 h3,
