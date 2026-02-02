@@ -24,7 +24,11 @@ export default function HeroSection() {
         <section
             ref={ref}
             className="relative min-h-screen flex items-center justify-center"
-            style={{ isolation: 'isolate' }}
+            style={{
+                isolation: 'isolate',
+                marginTop: 'calc(-1 * env(safe-area-inset-top, 0px))',
+                paddingTop: 'env(safe-area-inset-top, 0px)',
+            }}
         >
             {/* Background Image with Parallax */}
             <motion.div
