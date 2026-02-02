@@ -42,9 +42,9 @@ export default function ScrollStory() {
     ];
 
     return (
-        <section ref={containerRef} className="relative min-h-[400vh] bg-black z-10">
+        <section ref={containerRef} className="relative min-h-[400vh] bg-black">
             {/* Sticky Container with solid black background */}
-            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black z-10">
+            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black">
                 {/* Story Steps */}
                 {storySteps.map((step, index) => (
                     <ScrollStoryStep

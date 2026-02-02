@@ -40,7 +40,7 @@ export default function Header() {
                     pointerEvents: isScrolled ? 'auto' : 'none'
                 }}
                 transition={{ duration: 0.2 }}
-                className="fixed top-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-lg border-b border-primary/10 shadow-sm pt-[env(safe-area-inset-top,0px)]"
+                className="fixed top-0 left-0 right-0 z-[9999] bg-background border-b border-primary/10 shadow-sm pt-[env(safe-area-inset-top,0px)]"
             >
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-16 md:h-20">
