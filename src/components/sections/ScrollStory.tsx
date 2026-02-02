@@ -94,11 +94,13 @@ function BlurredBackground({ image, index, total, scrollYProgress }: BlurredBack
     const start = index / total;
     const end = (index + 1) / total;
 
-    // Show blurred version slightly before the actual image appears
+    // First slide appears immediately, others appear slightly before
     const opacity = useTransform(
         scrollYProgress,
-        [start - 0.1, start - 0.02, end - 0.02, end + 0.05],
-        [0, 0.7, 0.7, 0]
+        index === 0
+            ? [0, 0.01, end - 0.02, end + 0.05]
+            : [start - 0.05, start, end - 0.02, end + 0.02],
+        [0.7, 0.7, 0.7, 0]
     );
 
     return (
