@@ -33,7 +33,8 @@ export default function Header() {
     return (
         <>
             <header
-                className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 pt-[env(safe-area-inset-top,0px)] ${isScrolled
+                style={{ transform: 'translateZ(0)' }}
+                className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 pt-[env(safe-area-inset-top,0px)] will-change-transform ${isScrolled
                     ? "bg-background/95 backdrop-blur-lg border-b border-primary/10 shadow-sm"
                     : "bg-transparent"
                     }`}
