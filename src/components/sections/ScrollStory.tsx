@@ -42,9 +42,19 @@ export default function ScrollStory() {
     ];
 
     return (
-        <section ref={containerRef} className="relative min-h-[400vh] bg-black">
+        <section
+            ref={containerRef}
+            className="relative min-h-[400vh] bg-black"
+            style={{ isolation: 'isolate' }}
+        >
             {/* Sticky Container with solid black background */}
-            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black">
+            <div
+                className="sticky top-0 h-screen flex items-center justify-center bg-black"
+                style={{
+                    clipPath: 'inset(0)',
+                    WebkitClipPath: 'inset(0)',
+                }}
+            >
                 {/* Story Steps */}
                 {storySteps.map((step, index) => (
                     <ScrollStoryStep

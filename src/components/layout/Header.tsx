@@ -26,21 +26,25 @@ export default function Header() {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 100);
         };
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Conditional rendering - don't render header at all when not needed
+    if (!isScrolled && !isMobileMenuOpen) {
+        return null;
+    }
+
     return (
         <>
-            <motion.header
-                initial={{ opacity: 0, y: -20 }}
-                animate={{
-                    opacity: isScrolled ? 1 : 0,
-                    y: isScrolled ? 0 : -20,
-                    pointerEvents: isScrolled ? 'auto' : 'none'
+            <header
+                style={{
+                    transform: 'translate3d(0, 0, 0)',
+                    WebkitTransform: 'translate3d(0, 0, 0)',
+                    willChange: 'transform',
+                    paddingTop: 'env(safe-area-inset-top, 0px)',
                 }}
-                transition={{ duration: 0.2 }}
-                className="fixed top-0 left-0 right-0 z-[9999] bg-background border-b border-primary/10 shadow-sm pt-[env(safe-area-inset-top,0px)]"
+                className="fixed top-0 left-0 right-0 z-[9999] bg-background border-b border-primary/10 shadow-sm"
             >
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-16 md:h-20">
@@ -133,7 +137,7 @@ export default function Header() {
                         </div>
                     </nav>
                 </div>
-            </motion.header>
+            </header>
 
             {/* Mobile Menu */}
             <AnimatePresence>

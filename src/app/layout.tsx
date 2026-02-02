@@ -61,7 +61,7 @@ export default async function RootLayout({
           <LanguageProvider>
             <ThemeProvider>
               <Header />
-              <main>{children}</main>
+              <main style={{ isolation: 'isolate' }}>{children}</main>
               <Footer />
               <WhatsAppButton />
             </ThemeProvider>

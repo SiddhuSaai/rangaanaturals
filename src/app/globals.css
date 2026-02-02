@@ -7,17 +7,17 @@
   --color-primary: #2E7D32;
   --color-primary-dark: #1B5E20;
   --color-primary-light: #4CAF50;
-  
+
   /* Accent Colors */
   --color-grass-light: #E8F5E9;
   --color-earth-brown: #6D4C41;
   --color-gold: #C9A227;
-  
+
   /* Backgrounds */
   --background: #FAFAF7;
   --foreground: #1A1A1A;
   --surface: #FFFFFF;
-  
+
   /* Text Colors */
   --text-primary: #1A1A1A;
   --text-secondary: #5C5C5C;
@@ -29,14 +29,14 @@
   --color-primary: #4CAF50;
   --color-primary-dark: #2E7D32;
   --color-primary-light: #81C784;
-  
+
   --color-grass-light: #1A3D2B;
   --color-earth-brown: #A1887F;
-  
+
   --background: #0F2A1D;
   --foreground: #E8F5E9;
   --surface: #1A3D2B;
-  
+
   --text-primary: #E8F5E9;
   --text-secondary: #A5D6A7;
   --text-muted: #81C784;
@@ -67,24 +67,44 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter, 'Inter', sans-serif);
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-playfair, 'Playfair Display', serif);
   font-weight: 600;
   line-height: 1.2;
 }
 
-/* Safe area header for notched devices */
+/* Safe area and fixed positioning fixes for mobile */
 .safe-header {
   padding-top: env(safe-area-inset-top, 0px);
 }
 
-@supports not (padding-top: env(safe-area-inset-top)) {
-  .safe-header {
-    padding-top: 0px;
+/* Force GPU layer for fixed elements on mobile */
+@supports (-webkit-touch-callout: none) {
+
+  /* iOS Safari specific fixes */
+  .fixed {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
+}
+
+/* Ensure body doesn't break fixed positioning */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: visible;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ===== UTILITY CLASSES ===== */
@@ -97,19 +117,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-gradient-hero {
-  background: linear-gradient(180deg, 
-    rgba(255, 255, 255, 0) 0%,
-    rgba(232, 245, 233, 0.3) 50%,
-    rgba(232, 245, 233, 0.6) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(232, 245, 233, 0.3) 50%,
+      rgba(232, 245, 233, 0.6) 100%);
 }
 
 .dark .bg-gradient-hero {
-  background: linear-gradient(180deg, 
-    rgba(15, 42, 29, 0) 0%,
-    rgba(15, 42, 29, 0.5) 50%,
-    rgba(15, 42, 29, 0.9) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(15, 42, 29, 0) 0%,
+      rgba(15, 42, 29, 0.5) 50%,
+      rgba(15, 42, 29, 0.9) 100%);
 }
 
 /* Glassmorphism Card */
@@ -162,9 +180,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Scroll indicator animation */
 @keyframes bounce-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(10px);
   }
@@ -176,9 +197,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* WhatsApp pulse animation */
 @keyframes pulse-green {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
   }
+
   50% {
     box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
   }
