@@ -105,6 +105,8 @@ html {
 body {
   overflow-x: visible;
   -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===== UTILITY CLASSES ===== */
