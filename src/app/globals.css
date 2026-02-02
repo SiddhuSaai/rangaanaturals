@@ -67,6 +67,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter, 'Inter', sans-serif);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 h1,
@@ -80,37 +81,15 @@ h6 {
   line-height: 1.2;
 }
 
-/* Safe area and fixed positioning fixes for mobile */
+/* Safe area header for notched devices */
 .safe-header {
   padding-top: env(safe-area-inset-top, 0px);
 }
 
-/* Force GPU layer for fixed elements on mobile */
-@supports (-webkit-touch-callout: none) {
-
-  /* iOS Safari specific fixes */
-  .fixed {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+@supports not (padding-top: env(safe-area-inset-top)) {
+  .safe-header {
+    padding-top: 0px;
   }
-}
-
-/* Ensure body doesn't break fixed positioning */
-html {
-  overflow-x: hidden;
-  min-height: 100%;
-  min-height: -webkit-fill-available;
-}
-
-body {
-  overflow-x: visible;
-  -webkit-overflow-scrolling: touch;
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  min-height: -webkit-fill-available;
 }
 
 /* ===== UTILITY CLASSES ===== */

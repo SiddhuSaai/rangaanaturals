@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [safeAreaTop, setSafeAreaTop] = useState(0);
     const { theme, toggleTheme, mounted } = useTheme();
     const { locale, setLocale, isLoading } = useLanguage();
     const t = useTranslations("nav");
@@ -26,43 +27,34 @@ export default function Header() {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 100);
         };
-        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Detect safe area inset for notched devices
-    const [safeAreaTop, setSafeAreaTop] = useState(0);
+    // Detect safe area inset on mount
     useEffect(() => {
-        // Try to get safe area from CSS env()
-        const testEl = document.createElement('div');
-        testEl.style.paddingTop = 'env(safe-area-inset-top, 0px)';
-        document.body.appendChild(testEl);
-        const computed = parseInt(getComputedStyle(testEl).paddingTop) || 0;
-        document.body.removeChild(testEl);
-
-        // If env() returns 0 but we're on a notched device, use fallback
-        // Check if viewport-fit is cover and screen dimensions suggest a notched phone
-        const isNotchedDevice = window.innerWidth < 500 && window.innerHeight > 700 &&
-            (window.screen.height >= 812 || window.devicePixelRatio >= 3);
-
-        setSafeAreaTop(computed > 0 ? computed : (isNotchedDevice ? 47 : 0));
+        const computeSafeArea = () => {
+            const div = document.createElement('div');
+            div.style.paddingTop = 'env(safe-area-inset-top, 0px)';
+            document.body.appendChild(div);
+            const computedStyle = window.getComputedStyle(div);
+            const paddingTop = parseInt(computedStyle.paddingTop, 10) || 0;
+            document.body.removeChild(div);
+            setSafeAreaTop(paddingTop);
+        };
+        computeSafeArea();
+        window.addEventListener('resize', computeSafeArea);
+        return () => window.removeEventListener('resize', computeSafeArea);
     }, []);
-
-    // Conditional rendering - don't render header at all when not needed
-    if (!isScrolled && !isMobileMenuOpen) {
-        return null;
-    }
 
     return (
         <>
-            <header
-                style={{
-                    transform: 'translate3d(0, 0, 0)',
-                    WebkitTransform: 'translate3d(0, 0, 0)',
-                    willChange: 'transform',
-                    paddingTop: safeAreaTop,
-                }}
-                className="fixed top-0 left-0 right-0 z-[9999] bg-background border-b border-primary/10 shadow-sm"
+            <motion.header
+                initial={{ y: -(80 + safeAreaTop) }}
+                animate={{ y: isScrolled ? 0 : -(80 + safeAreaTop) }}
+                transition={{ duration: 0.3 }}
+                style={{ paddingTop: safeAreaTop }}
+                className="fixed top-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-lg border-b border-primary/10 shadow-sm"
             >
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-16 md:h-20">
@@ -155,7 +147,7 @@ export default function Header() {
                         </div>
                     </nav>
                 </div>
-            </header>
+            </motion.header>
 
             {/* Mobile Menu */}
             <AnimatePresence>
