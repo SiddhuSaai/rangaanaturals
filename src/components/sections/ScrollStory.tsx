@@ -1,15 +1,21 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export default function ScrollStory() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [isInView, setIsInView] = useState(false);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
+    });
+
+    // Track when scroll story section is in view
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        setIsInView(latest > 0 && latest < 1);
     });
 
     const t = useTranslations("scrollStory");
@@ -43,8 +49,13 @@ export default function ScrollStory() {
 
     return (
         <section ref={containerRef} className="relative min-h-[400vh] bg-black z-10">
-            {/* Sticky Container with solid black background */}
-            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden bg-black z-10">
+            {/* Fixed Container - uses fixed positioning when in view */}
+            <div
+                className={`${isInView ? 'fixed' : 'absolute'} top-0 left-0 right-0 h-screen flex items-center justify-center overflow-hidden bg-black z-10`}
+                style={{
+                    transform: 'translate3d(0, 0, 0)',
+                }}
+            >
                 {/* Story Steps */}
                 {storySteps.map((step, index) => (
                     <ScrollStoryStep
