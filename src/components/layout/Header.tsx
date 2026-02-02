@@ -11,7 +11,6 @@ import { useTranslations } from "next-intl";
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [safeAreaTop, setSafeAreaTop] = useState(0);
     const { theme, toggleTheme, mounted } = useTheme();
     const { locale, setLocale, isLoading } = useLanguage();
     const t = useTranslations("nav");
@@ -25,36 +24,19 @@ export default function Header() {
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 100);
+            setIsScrolled(window.scrollY > 50);
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Detect safe area inset on mount
-    useEffect(() => {
-        const computeSafeArea = () => {
-            const div = document.createElement('div');
-            div.style.paddingTop = 'env(safe-area-inset-top, 0px)';
-            document.body.appendChild(div);
-            const computedStyle = window.getComputedStyle(div);
-            const paddingTop = parseInt(computedStyle.paddingTop, 10) || 0;
-            document.body.removeChild(div);
-            setSafeAreaTop(paddingTop);
-        };
-        computeSafeArea();
-        window.addEventListener('resize', computeSafeArea);
-        return () => window.removeEventListener('resize', computeSafeArea);
-    }, []);
-
     return (
         <>
-            <motion.header
-                initial={{ y: -(80 + safeAreaTop) }}
-                animate={{ y: isScrolled ? 0 : -(80 + safeAreaTop) }}
-                transition={{ duration: 0.3 }}
-                style={{ paddingTop: safeAreaTop }}
-                className="fixed top-0 left-0 right-0 z-[100] bg-background/95 backdrop-blur-lg border-b border-primary/10 shadow-sm"
+            <header
+                className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 pt-[env(safe-area-inset-top,0px)] ${isScrolled
+                    ? "bg-background/95 backdrop-blur-lg border-b border-primary/10 shadow-sm"
+                    : "bg-transparent"
+                    }`}
             >
                 <div className="container-custom">
                     <nav className="flex items-center justify-between h-16 md:h-20">
@@ -147,7 +129,7 @@ export default function Header() {
                         </div>
                     </nav>
                 </div>
-            </motion.header>
+            </header>
 
             {/* Mobile Menu */}
             <AnimatePresence>
