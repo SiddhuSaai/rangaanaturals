@@ -48,7 +48,7 @@ export default function ScrollStory() {
     ];
 
     return (
-        <section ref={containerRef} className="relative min-h-[400vh] bg-black z-10">
+        <section ref={containerRef} className="relative min-h-[250vh] bg-black z-10">
             {/* Fixed Container - uses fixed positioning when in view */}
             <div
                 className={`${isInView ? 'fixed' : 'absolute'} top-0 left-0 right-0 h-screen flex items-center justify-center overflow-hidden bg-black z-10`}
